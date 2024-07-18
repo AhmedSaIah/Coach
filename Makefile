@@ -16,7 +16,7 @@ CMD_DIR = cmd
 
 EXECUTABLE = taskmanager
 
-.PHONY: all build run test clean fmt deps docker-up docker-down migrate dbshell
+.PHONY: all build run test clean fmt lint deps docker-up docker-down migrate dbshell
 
 all: build
 
