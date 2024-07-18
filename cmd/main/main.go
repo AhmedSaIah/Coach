@@ -8,6 +8,13 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"os"
+
+    // "TaskManager/graph"
+	// "TaskManager/graph/resolver"
+
+    "net/http"
+    // "github.com/99designs/gqlgen/graphql/handler"
+    "github.com/99designs/gqlgen/graphql/playground"
 )
 
 var db *gorm.DB
@@ -44,7 +51,17 @@ func migrate() {
 	}
 }
 
+// const defaultPort = "8080"
+
 func main() {
-	initDB()
-	migrate()
+    initDB()
+    migrate()
+
+    // srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &resolver.Resolver{DB: db}}))
+
+    // http.Handle("/graphql", srv)
+    http.Handle("/playground", playground.Handler("GraphQL playground", "/graphql"))
+
+    log.Println("connect to http://localhost:8080/playground for GraphQL playground")
+    log.Fatal(http.ListenAndServe(":8080", nil))
 }
